@@ -10,30 +10,50 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-        }
+            Covjek kreso = new Covjek("kreso", "Suput", 23);
+            Console.WriteLine(Covjek.getNumOfEmployess());
+            List<Covjek> All = new List<Covjek>();
+            All.Add(kreso);
+            //All.ForEach.ToString(Console.WriteLine);
+            foreach (object o in All)
+            {
+                Console.WriteLine(o.ToString());
+            }
+            Console.ReadLine();
+
+
+            
+            }
     }
 
 
     class Command
     {
-        public string Help()
+        public static List<Covjek> All = new List<Covjek>();
+
+        public static string Help()
         {
         }
-        public void Add()
+        public static void Add(Covjek novi)
         {
+            All.Add(novi);
+
         }
 
-        public void Remove()
+        public static void Remove()
         { }
-        public void Display()
-            //uc u numOfEmployes od covjeka    
-        { // Console.WriteLine()
-            //    Consule.Readline()}
-        public void List()
-            { // ko display al izbacit iz liste CEO 
-                // (pretrazit arrey po kljucnoj rijeci i remove
-        //{ }
+        public static void Display()
 
+        {
+            Console.WriteLine(Covjek.getNumOfEmployess());
+            Consule.Readline();
+        }
+        public static void List()
+        { // ko display al izbacit iz liste CEO 
+          // (pretrazit arrey po kljucnoj rijeci i remove
+          //{ }
+
+        }
     }
     class Role
     {
@@ -66,6 +86,10 @@ namespace ConsoleApp1
             this.age = age;
             numOfEmployees++;
 
+        }
+        public override string ToString()
+        {
+            return String.Format("{0} {1} , {2} godine ", firstName, lastName, age);
         }
 
         static int numOfEmployees = 0;
@@ -128,6 +152,6 @@ namespace ConsoleApp1
         public ST(string firstName, string lastName, int age, string Project, bool UsesAutomatedTests) : base(firstName, lastName, age, Project)
         {
             this.UsesAutomatedTests = UsesAutomatedTests;
+        }
     }
-
 }
