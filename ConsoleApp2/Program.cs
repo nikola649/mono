@@ -33,6 +33,7 @@ namespace ConsoleApp1
 
         public static string Help()
         {
+            Console.WriteLine("Add, Remove, Display, List, <>List");
         }
         public static void Add(Covjek novi)
         {
@@ -40,14 +41,30 @@ namespace ConsoleApp1
 
         }
 
-        public static void Remove()
-        { }
+        public static void Remove(string prezimeZaIzbacit)
+        {
+            for (int i = Covjek.getNumOfEmployess-1; i >= 0; i--)
+            {
+                if (All[i].lastName == prezimeZaIzbacit)
+                {
+                    All.RemoveAt(i);
+                }
+            }
+        }
         public static void Display()
 
         {
-            Console.WriteLine(Covjek.getNumOfEmployess());
-            Consule.Readline();
-        }
+            //Console.WriteLine(Covjek.getNumOfEmployess());
+            //Consule.Readline();
+
+            foreach (object o in All)
+            {
+                Console.WriteLine(o.ToString());
+            }
+            Console.ReadLine();
+
+
+            }
         public static void List()
         { // ko display al izbacit iz liste CEO 
           // (pretrazit arrey po kljucnoj rijeci i remove
