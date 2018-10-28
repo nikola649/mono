@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Covjek kreso = new Covjek("kreso", "Suput", 23);
-            Console.WriteLine(Covjek.getNumOfEmployess());
-            List<Covjek> All = new List<Covjek>();
+            Employee kreso = new Employee("kreso", "Suput", 23);
+            Console.WriteLine(Employee.getNumOfEmployess());
+            List<Employee> All = new List<Employee>();
             All.Add(kreso);
             //All.ForEach.ToString(Console.WriteLine);
             foreach (object o in All)
@@ -29,21 +30,23 @@ namespace ConsoleApp1
 
     class Command
     {
-        public static List<Covjek> All = new List<Covjek>();
-
+        
+        public static ArrayList All = new ArrayList();
+        //public static List<Employee> All = new List<Employee>();
+  
         public static string Help()
         {
-            Console.WriteLine("Add, Remove, Display, List, <>List");
+            Console.WriteLine("Possible commands: Add, Remove, Display, List, <>List");
         }
-        public static void Add(Covjek novi)
+        public static void Add(var novi)
         {
             All.Add(novi);
-
         }
 
         public static void Remove(string prezimeZaIzbacit)
         {
-            for (int i = Covjek.getNumOfEmployess-1; i >= 0; i--)
+            //for (int i = All.Capacity; i>=0;i--)
+            for (int i = Employee.getNumOfEmployess-1; i >= 0; i--)
             {
                 if (All[i].lastName == prezimeZaIzbacit)
                 {
@@ -54,30 +57,56 @@ namespace ConsoleApp1
         public static void Display()
 
         {
-            //Console.WriteLine(Covjek.getNumOfEmployess());
-            //Consule.Readline();
-
             foreach (object o in All)
-            {
+            { 
                 Console.WriteLine(o.ToString());
             }
             Console.ReadLine();
-
-
+            
+            // za broj koliko ih jeConsole.WriteLine(Employee.getNumOfEmployess());
+            //Consule.Readline();
             }
         public static void List()
-        { // ko display al izbacit iz liste CEO 
+        { 
+            
+            foreach (object o in All)
+            {
+                if(o.role== Role.CEO )
+                    continue;
+                
+                Console.WriteLine(o.ToString());
+            }
+            Console.ReadLine();
+         
+          // ko display al izbacit iz liste CEO 
           // (pretrazit arrey po kljucnoj rijeci i remove
           //{ }
 
         }
+        public static void PMList()
+        { 
+            
+            foreach (object o in All)
+            {
+                if(o.role== Role.PM)
+                
+                        Console.WriteLine(o.ToString());
+            }
+            Console.ReadLine();
+        }
     }
-    class Role
-    {
 
-    }
-    class Covjek
+    
+    public enum Role
     {
+        CEO, PM, DEV, DSNR, ST
+    }
+
+
+
+    public class Employee
+    {
+        public Role role;
         //ovo je roditelj klasa za sve sto je isto
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -87,15 +116,15 @@ namespace ConsoleApp1
           set { age = value; }
 
         }
-
-        public Covjek ()
+        
+            public Employee ()
         {
             this.firstName = "No Name";
             this.lastName = "No LastName";
             this.age = 0;
             numOfEmployees++;
         }
-        public Covjek (string firstName, string lastName, int age)
+        public Employee (string firstName, string lastName, int age)
         {
             
             this.firstName = firstName;
@@ -115,16 +144,20 @@ namespace ConsoleApp1
             return numOfEmployees;
         }
     }
-    class PM : Covjek
+    
+    class PM : Employee
     {
         public string Project { get; set; }
         public PM() : base()
         {
+            this.role= PM;
+            
             this.Project = "No project";
 
         }
         public PM(string firstName, string lastName, int age, string Project) : base(firstName, lastName, age)
         {
+            this.role= PM;
             this.Project = Project;
 
         }
@@ -132,14 +165,20 @@ namespace ConsoleApp1
 
     class DEV : PM
     {
+        
         public bool IsStudent { get; set; }
         public DEV() : base()
         {
+            this.role= DEV;
+         
             bool isStudent = false;
 
         }
         public DEV (string firstName, string lastName, int age, string Project, bool IsStudent) : base(firstName, lastName, age, Project)
         {
+            
+            this.role= DEV;
+         
             this.IsStudent = IsStudent;
         }
     }
@@ -149,11 +188,17 @@ namespace ConsoleApp1
         public bool canDraw { get; set; }
         public DSNR() : base()
         {
+               
+            this.role= DSNR;
+         
             bool canDraw = false;
 
         }
         public DSNR (string firstName, string lastName, int age, string Project, bool canDraw) : base(firstName, lastName, age, Project)
         {
+            
+            this.role= DSNR;
+         
             this.canDraw = canDraw;
         }
     }
@@ -163,12 +208,19 @@ namespace ConsoleApp1
         public bool UsesAutomatedTests { get; set; }
         public ST() : base()
         {
+               
+            this.role= ST;
+         
             bool UsesAutomatedTests = false;
 
         }
         public ST(string firstName, string lastName, int age, string Project, bool UsesAutomatedTests) : base(firstName, lastName, age, Project)
         {
+            
+            this.role= ST;
+         
             this.UsesAutomatedTests = UsesAutomatedTests;
         }
     }
+
 }
