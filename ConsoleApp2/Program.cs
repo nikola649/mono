@@ -11,6 +11,52 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+
+            Command.Help();
+            string keyword;
+            Boolean quitNow = false;
+            while(!quitNow)
+            {
+               keyword = Console.ReadLine(); 
+               keyword.ToUpper();
+               switch (keyword)
+               {
+                  case "HELP":
+                    Command.Help();
+                          break;
+
+                   case "ADD":
+                     Command.Add();
+                     break;
+
+                   case "REMOVE":
+                     Command.Remove();
+                     break;
+
+                   case "DISPLAY":
+                        Command.Display();
+                        break;
+                        
+                   case "lIST":
+                        Command.List();
+                        break;
+                        
+                   case "PMlIST":
+                        Command.PMList();
+                        break;
+                  //sad jos sve ostale specijalne liste...
+
+                    case "QUIT":
+                      quitNow = true;
+                      break;
+
+                    default:
+                      Console.WriteLine("Unknown Command " + keyword);
+                      break;
+               }
+            }
+     
+            /*
             Employee kreso = new Employee("kreso", "Suput", 23);
             Console.WriteLine(Employee.getNumOfEmployess());
             List<Employee> All = new List<Employee>();
@@ -22,9 +68,9 @@ namespace ConsoleApp1
             }
             Console.ReadLine();
 
-
+            */
             
-            }
+        }
     }
 
 
