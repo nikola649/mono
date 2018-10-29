@@ -84,9 +84,36 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Possible commands: Add, Remove, Display, List, <>List");
         }
-        public static void Add(var novi)
-        {
-            All.Add(novi);
+        public static void Add()
+        {   
+            Console.WriteLine("What role?");
+            uloga = Console.ReadLine(); 
+            uloga.ToUpper();
+
+               switch (uloga)
+               {
+                  case "PM":
+                    PM novi = new PM{};
+                    All.Add(PM);
+                          break;
+
+                   case "ADD":
+                     Command.Add(keyword);
+                     break;
+
+                   case "REMOVE":
+                     Command.Remove();
+                     break;
+
+                   case "DISPLAY":
+                        Command.Display();
+                        break;
+                        
+                   case "lIST":
+                        Command.List();
+                        break;
+               }      
+               
         }
 
         public static void Remove(string prezimeZaIzbacit)
@@ -196,14 +223,14 @@ namespace ConsoleApp1
         public string Project { get; set; }
         public PM() : base()
         {
-            this.role= PM;
+            this.role= Role.PM;
             
             this.Project = "No project";
 
         }
         public PM(string firstName, string lastName, int age, string Project) : base(firstName, lastName, age)
         {
-            this.role= PM;
+            this.role= Role.PM;
             this.Project = Project;
 
         }
