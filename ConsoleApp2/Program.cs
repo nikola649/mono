@@ -77,55 +77,84 @@ namespace ConsoleApp1
     class Command
     {
         
-        public static ArrayList All = new ArrayList();
-        //public static List<Employee> All = new List<Employee>();
-  
-        public static string Help()
+        //public static ArrayList All = new ArrayList();
+        public static List<Employee> All = new List<Employee>();
+        public static List<PM> project_menagers = new List<PM>();
+
+        public static void Help()
         {
             Console.WriteLine("Possible commands: Add, Remove, Display, List, <>List");
         }
         public static void Add()
         {   
             Console.WriteLine("What role?");
-            uloga = Console.ReadLine(); 
-            uloga.ToUpper();
-
+             string uloga = Console.ReadLine(); 
+             uloga.ToUpper();
                switch (uloga)
                {
+
                   case "PM":
-                    PM novi = new PM{};
-                    All.Add(PM);
+
+                    Console.WriteLine("First Name: ");
+                    string ime = Console.ReadLine();
+
+                    Console.WriteLine("Last Name: ");
+                    string prezime = Console.ReadLine();
+
+
+                    int godine=0;
+                    bool success = false;
+                    string value;
+                    while (success == false)
+                    {
+                        Console.WriteLine("Age: ");
+                        value = Console.ReadLine();
+                        success = Int32.TryParse(value, out godine);
+
+                    }
+                    Console.WriteLine("Project name: ");
+                    string project = Console.ReadLine();
+
+                    PM novi = new PM(ime, prezime, godine, project);
+                    Employee taj = novi;
+                    All.Add(taj);
+                    project_menagers.Add(novi);
+
                           break;
+                    /*
+                                       case "ADD":
+                                         Command.Add(keyword);
+                                         break;
+                    
+                                       case "REMOVE":
+                                         Command.Remove();
+                                         break;
 
-                   case "ADD":
-                     Command.Add(keyword);
-                     break;
+                                       case "DISPLAY":
+                                            Command.Display();
+                                            break;
 
-                   case "REMOVE":
-                     Command.Remove();
-                     break;
+                                       case "lIST":
+                                            Command.List();
+                                            break;
+                                            
+                            */
+            }
 
-                   case "DISPLAY":
-                        Command.Display();
-                        break;
-                        
-                   case "lIST":
-                        Command.List();
-                        break;
-               }      
-               
         }
-
-        public static void Remove(string prezimeZaIzbacit)
+            public static void Remove()
         {
-            //for (int i = All.Capacity; i>=0;i--)
-            for (int i = Employee.getNumOfEmployess-1; i >= 0; i--)
+            Console.WriteLine("Fire: ");
+            string prezimeZaIzbacit = Console.ReadLine();
+            for (int i = All.Capacity; i>=0;i--)
+            //for (int i = Employee.getNumOfEmployess-1; i >= 0; i--)
             {
                 if (All[i].lastName == prezimeZaIzbacit)
                 {
                     All.RemoveAt(i);
                 }
             }
+            // izbaci ga i iz posebne liste
         }
         public static void Display()
 
@@ -142,7 +171,7 @@ namespace ConsoleApp1
         public static void List()
         { 
             
-            foreach (object o in All)
+            foreach (Employee o in All)
             {
                 if(o.role== Role.CEO )
                     continue;
@@ -157,13 +186,15 @@ namespace ConsoleApp1
 
         }
         public static void PMList()
-        { 
+        {
             
-            foreach (object o in All)
+            foreach (PM o in project_menagers)
             {
-                if(o.role== Role.PM)
-                
-                        Console.WriteLine(o.ToString());
+                Console.WriteLine(o.ToString());
+                //kako napravit tu malu listu
+                // if(o.role== Role.PM)
+
+                //Console.WriteLine(o.ToString());
             }
             Console.ReadLine();
         }
@@ -220,13 +251,15 @@ namespace ConsoleApp1
     
     class PM : Employee
     {
+        //public static List<PM> PMList = new List<PM>();
+
         public string Project { get; set; }
         public PM() : base()
         {
             this.role= Role.PM;
             
             this.Project = "No project";
-
+          //  PMList.Append(this);
         }
         public PM(string firstName, string lastName, int age, string Project) : base(firstName, lastName, age)
         {
@@ -242,7 +275,7 @@ namespace ConsoleApp1
         public bool IsStudent { get; set; }
         public DEV() : base()
         {
-            this.role= DEV;
+            this.role= Role.DEV;
          
             bool isStudent = false;
 
@@ -250,7 +283,7 @@ namespace ConsoleApp1
         public DEV (string firstName, string lastName, int age, string Project, bool IsStudent) : base(firstName, lastName, age, Project)
         {
             
-            this.role= DEV;
+            this.role= Role.DEV;
          
             this.IsStudent = IsStudent;
         }
@@ -262,7 +295,7 @@ namespace ConsoleApp1
         public DSNR() : base()
         {
                
-            this.role= DSNR;
+            this.role= Role.DSNR;
          
             bool canDraw = false;
 
@@ -270,7 +303,7 @@ namespace ConsoleApp1
         public DSNR (string firstName, string lastName, int age, string Project, bool canDraw) : base(firstName, lastName, age, Project)
         {
             
-            this.role= DSNR;
+            this.role= Role.DSNR;
          
             this.canDraw = canDraw;
         }
@@ -282,7 +315,7 @@ namespace ConsoleApp1
         public ST() : base()
         {
                
-            this.role= ST;
+            this.role= Role.ST;
          
             bool UsesAutomatedTests = false;
 
@@ -290,7 +323,7 @@ namespace ConsoleApp1
         public ST(string firstName, string lastName, int age, string Project, bool UsesAutomatedTests) : base(firstName, lastName, age, Project)
         {
             
-            this.role= ST;
+            this.role= Role.ST;
          
             this.UsesAutomatedTests = UsesAutomatedTests;
         }
