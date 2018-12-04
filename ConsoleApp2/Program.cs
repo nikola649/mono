@@ -72,7 +72,10 @@ namespace ConsoleApp1
             
         }
     }
-
+    class SpecialList<T>
+    {
+        private List<T> data;
+        public static Add();    }
 
     class Command
     {
@@ -86,61 +89,67 @@ namespace ConsoleApp1
             Console.WriteLine("Possible commands: Add, Remove, Display, List, <>List");
         }
         public static void Add()
-        {   
+        {
             Console.WriteLine("What role?");
-             string uloga = Console.ReadLine(); 
-             uloga.ToUpper();
-               switch (uloga)
-               {
+            string uloga = Console.ReadLine();
+            uloga.ToUpper();
 
-                  case "PM":
+            Console.WriteLine("First Name: ");
+            string ime = Console.ReadLine();
 
-                    Console.WriteLine("First Name: ");
-                    string ime = Console.ReadLine();
-
-                    Console.WriteLine("Last Name: ");
-                    string prezime = Console.ReadLine();
+            Console.WriteLine("Last Name: ");
+            string prezime = Console.ReadLine();
 
 
-                    int godine=0;
-                    bool success = false;
-                    string value;
-                    while (success == false)
-                    {
-                        Console.WriteLine("Age: ");
-                        value = Console.ReadLine();
-                        success = Int32.TryParse(value, out godine);
+            int godine = 0;
+            bool success = false;
+            string value;
+            while (success == false)
+            {
+                Console.WriteLine("Age: ");
+                value = Console.ReadLine();
+                success = Int32.TryParse(value, out godine);
 
-                    }
-                    Console.WriteLine("Project name: ");
-                    string project = Console.ReadLine();
+            }
+            
+            if (ulaga = "CEO")
+            {
+                //ovo treba doradit
+                Console.WriteLine("CEO years: ");
+                int CeoYears = (int)Console.ReadLine();
 
-                    PM novi = new PM(ime, prezime, godine, project);
-                    Employee taj = novi;
-                    All.Add(taj);
-                    project_menagers.Add(novi);
-
-                          break;
-                    /*
-                                       case "ADD":
-                                         Command.Add(keyword);
-                                         break;
-                    
-                                       case "REMOVE":
-                                         Command.Remove();
-                                         break;
-
-                                       case "DISPLAY":
-                                            Command.Display();
-                                            break;
-
-                                       case "lIST":
-                                            Command.List();
-                                            break;
-                                            
-                            */
+                Console.WriteLine("You are about to add CEO");
+                //i sad treba zabranit dodavanje novog
             }
 
+            else
+            {
+                var NewHire;
+                Console.WriteLine("Project name: ");
+                string project = Console.ReadLine();
+
+                switch (uloga)
+                {
+                    case "PM":
+                        NewHire = new PM(ime, prezime, godine, project);
+                    case "DEV":
+
+                        Console.WriteLine("Is he student?: ");
+                        word=Console.ReadLine();
+                        word.ToUpper();
+                        bool Isstudent = false;
+                        if (word == "YES")
+                            IsStudent = true;
+                        NewHire = new DEV(ime, prezime, godine, project, Isstudent);
+
+                }
+                Employee taj = (Employee)NewHire;
+                All.Add(taj);
+                project_menagers.Add(NewHire);
+
+                break;
+
+            }
         }
             public static void Remove()
         {
@@ -230,7 +239,6 @@ namespace ConsoleApp1
         }
         public Employee (string firstName, string lastName, int age)
         {
-            
             this.firstName = firstName;
             this.lastName = lastName;
             this.age = age;
